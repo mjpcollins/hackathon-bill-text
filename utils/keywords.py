@@ -73,7 +73,14 @@ def get_sponsors(bill_number):
 
     r = requests.get(url=f'https://bills-api.parliament.uk/api/v1/Bills/{bill_number}')
     dict_content = json.loads(r.content)
-    return list({sponsor.get('organisation', {}).get('name') for sponsor in dict_content.get('sponsors')}), dict_content
+    result = list(
+        sponsor.get('organisation', {})
+        for sponsor in dict_content.get('sponsors')
+    )
+    print(result)
+    res = [r.get('name') for r in result if isinstance(r, dict)]
+    print(res)
+    return res, dict_content
 
 
 if __name__ == '__main__':
