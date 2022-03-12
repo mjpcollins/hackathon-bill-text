@@ -22,6 +22,11 @@ def bill_features(bill_id):
     return get_features(bill_id)
 
 
+@app.route('/bill-amendments/<bill_id>')
+def bill_amends(bill_id):
+    print(bill_id)
+    return {}
+
 
 def run():
     app.run(
