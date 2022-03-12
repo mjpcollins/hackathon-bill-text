@@ -1,17 +1,9 @@
 import re
 import json
-import nltk
 import requests
 from collections import Counter
-from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 from utils.get_bill_text import get_bill
-stop_words = set(stopwords.words('english'))
-stop_words.update({
-    'act', 'section', 'subsection',
-    'paragraph', 'person', 'member',
-    'members', 'must'
-})
 
 
 def get_features(bill_name):
@@ -22,7 +14,6 @@ def get_features(bill_name):
     :return: information
     """
 
-    nltk.download('stopwords')
     keywords = get_keywords(bill_name).most_common(20)
     category, sponsors = get_sponsors(bill_name)
     return {
@@ -54,6 +45,8 @@ def create_dict_of_words(text):
     :return: Dict of freq: value
     """
 
+    with open('config/stopwords.txt', 'r') as F:
+        stop_words = {w.replace('\n', '') for w in F.readlines()}
     t = remove_unimportant_characters(text)
     word_tokens = word_tokenize(t)
     filtered_sentence = [w.lower() for w in word_tokens if not w.lower() in stop_words]
