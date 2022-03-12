@@ -11,6 +11,7 @@ def home():
 
 @app.route('/bill/<bill_id>')
 def bill(bill_id):
+    print(bill_id)
     return get_bill(bill_id)
 
 
