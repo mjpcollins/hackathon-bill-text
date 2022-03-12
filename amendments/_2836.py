@@ -261,14 +261,15 @@ Schedule 1 — The Advanced Research and Invention Agency
 (5) The executive members are to be members of ARIA's staff.
 Executive members: term
 
-4  (1) Any appointment of a Chief Executive Officer must be for a fixed term of not more than five 
+Amended by kwazi Kuarteng
+[4  (1) Any appointment of a Chief Executive Officer must be for a fixed term of not more than five 
 years.
 (2) A person cannot be appointed as the Chief Executive Officer more than twice.
 5  (1) An executive member —
 (a) ceases to be a member of ARIA upon ceasing to be a member of ARIA's staff, and
 (b)  may resign from office by notifying the chair.
 (2) The Secretary of State may remove a person from office as an executive member if the Secretary 
-of State considers it necessary or expedient in the interests of national security.
+of State considers it necessary or expedient in the interests of national security. ]
 
 Non-executive members: tenure
 
