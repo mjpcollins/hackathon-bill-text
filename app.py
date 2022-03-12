@@ -1,11 +1,17 @@
 from flask import Flask
 from config.conf import settings
+from utils.get_bill_text import get_bill
 app = Flask(__name__)
 
 
 @app.route('/')
 def home():
     return 'OK'
+
+
+@app.route('/bill/<bill_id>')
+def bill(bill_id):
+    return get_bill(bill_id)
 
 
 def run():
