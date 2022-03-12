@@ -1,5 +1,6 @@
 import re
 import json
+import nltk
 import requests
 from collections import Counter
 from nltk.corpus import stopwords
@@ -21,6 +22,7 @@ def get_features(bill_name):
     :return: information
     """
 
+    nltk.download('stopwords')
     keywords = get_keywords(bill_name).most_common(20)
     category, sponsors = get_sponsors(bill_name)
     return {

@@ -2,8 +2,7 @@ from flask import Flask
 from config.conf import settings
 from utils.keywords import get_features
 from utils.get_bill_text import get_bill
-import nltk
-nltk.download('stopwords')
+
 app = Flask(__name__)
 
 
