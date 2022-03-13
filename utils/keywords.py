@@ -3,7 +3,6 @@ import json
 import requests
 from collections import Counter
 from config.conf import settings
-from nltk.tokenize import word_tokenize
 from utils.get_bill_text import get_bill
 
 
@@ -52,7 +51,7 @@ def create_dict_of_words(text):
     """
 
     t = remove_unimportant_characters(text)
-    word_tokens = word_tokenize(t)
+    word_tokens = t.split(' ')
     filtered_sentence = [w.lower() for w in word_tokens if not w.lower() in settings['stop_words']]
     return Counter(filtered_sentence)
 
