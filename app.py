@@ -1,3 +1,4 @@
+from flask_cors import CORS
 from flask import Flask, jsonify
 from config.conf import settings
 # from utils.get_amendment_test import get_change
@@ -10,6 +11,7 @@ from utils.get_bill_text import (
 )
 
 app = Flask(__name__)
+CORS(app)
 
 
 @app.route('/')
