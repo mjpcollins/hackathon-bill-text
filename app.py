@@ -1,4 +1,4 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, render_template
 from config.conf import settings
 # from utils.get_amendment_test import get_change
 from utils.keywords import get_features
@@ -7,6 +7,8 @@ from utils.get_bill_text import (
     get_amendments,
     split_amendments
 )
+
+from utils.newsfeed import newsfeed as get_newsfeed
 
 app = Flask(__name__)
 
@@ -67,11 +69,17 @@ def change(bill_id):
     print(bill_id)
     return get_change(bill_id)
 
+@app.route('/newsfeed')
+def newsfeed():
+    nf = get_newsfeed()
+    return render_template('newsfeed.html', feed=nf)
+
 
 def run():
     app.run(
         host='0.0.0.0',
-        port=settings['port']
+        port=settings['port'],
+        debug=True
     )
 
 
