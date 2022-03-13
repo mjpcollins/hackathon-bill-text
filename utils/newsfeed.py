@@ -21,17 +21,15 @@ def get_amendment(amendment_id, stage_id, bill_id):
 	url = f"{API_BASE}/Bills/{bill_id}/Stages/{stage_id}/Amendments/{amendment_id}"
 	return requests.get(url).json()
 
+def get_sample_bill_ids(sample_size=10):
+	url = f"{API_BASE}/Bills?Take={sample_size}&SortOrder=DateUpdatedDescending"
 
-"""
+	bill_ids = []
+	bills = requests.get(url).json()
+	for bill in bills['items']:
+		bill_ids.append(bill['billId'])
 
-Get all introductions of new bills or amendments to existing ones where:
-
-- bill id matches a subscribed bill id
-- category tag matches a subscribed category
-
-Consider these introductions/amendments as 'events' 
-
-"""
+	return bill_ids
 
 class NewsfeedEvent():
 
@@ -51,7 +49,12 @@ class NewsfeedEvent():
 		if self.event_type == 'introduction':
 			event_str = 'was introduced'
 		elif self.event_type == 'amendment':
-			event_str = 'was amended'
+			num_amendments = self.details['num_amendments']
+
+			if num_amendments == 1:
+				event_str = f"was amended"
+			else:
+				event_str = f"was amended {num_amendments} times"
 		elif self.event_type == 'stage_change':
 			if self.details['new_stage'] == 'Royal Assent':
 				event_str = 'received Royal Assent'
@@ -70,16 +73,16 @@ def newsfeed(use_subscriptions=False):
 	# else just look at all the bills that are available
 	# (for now, just do the latter)
 
-	for bill_id in BILL_IDS:
+	for bill_id in get_sample_bill_ids(10):
 		
 		bill = get_bill(bill_id)
 
-		# get amendments and create event for each
+		# the API only allows querying amendments by bill stage, so follow the history
+		# of the bill in order to get all the relevant stages
+
 		bill_stages = []
 		all_sitting_dates = []
 
-		# amendments are only given by bill stage in the API, so follow the history of the
-		# bill in order to get all the relevant stages
 		stages = get_stages(bill_id)
 		for stage in stages['items']:
 			sittings = stage['stageSittings']
@@ -96,45 +99,22 @@ def newsfeed(use_subscriptions=False):
 				sitting_dates.append(sitting_date)
 				all_sitting_dates.append(sitting_date)
 
-			# create an event to note that the bill moved stages at a certain point
-			# use the earliest sitting date for each stage
-			details = {
-				'new_stage': stage['description']
-			}
-			events.append(NewsfeedEvent(bill_id, bill['shortTitle'], 'stage_change', min(sitting_dates), details))
+			if len(sitting_dates) > 0:
+				# create an event to note that the bill moved stages at a certain point
+				# use the earliest sitting date for each stage
+				details = {
+					'new_stage': stage['description']
+				}
+				events.append(NewsfeedEvent(bill_id, bill['shortTitle'], 'stage_change', min(sitting_dates), details))
+
+				amendments = get_amendments(bill_id, bill_stage_id)
+				if amendments['totalResults'] > 0:
+					events.append(NewsfeedEvent(bill_id, bill['shortTitle'], 'amendment', min(sitting_dates), { 'num_amendments': amendments['totalResults'] }))
+
 
 		# create an event for the bill introduction
 		# use the earliest date from all the sittings as the introduction date
 		events.append(NewsfeedEvent(bill_id, bill['shortTitle'], 'introduction', min(all_sitting_dates)))
 
-			
-
-		# mark amendments
-		"""
-		for bill_stage in bill_stages:
-			amendments = get_amendments(bill_id, stage)
-
-			for amendment in amendments['items']:
-				amendment_date = 
-				event = NewsFeedEvent(bill_id, bill['short_title'], 'amendment', amendment_date)
-
-				events.append(event)
-		"""
-
-	# sort the events with the newest first
 	events.sort(key=lambda event: event.time, reverse=True)
 	return events
-
-
-
-
-
-"""
-
-For each event, show the:
-
-- Id/title of the bill
-- Short description of the event
-- Link to view the details
-
-"""
