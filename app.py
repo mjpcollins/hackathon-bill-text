@@ -5,7 +5,8 @@ from utils.keywords import get_features
 from utils.get_bill_text import (
     get_bill,
     get_amendments,
-    split_amendments
+    split_amendments,
+    search_titles
 )
 
 app = Flask(__name__)
@@ -51,13 +52,20 @@ def bill_amends(bill_id):
 def search(keyword):
     print(f'Searching for {keyword}...')
     bills = []
+    bills_ids = []
     for bill_id in settings['bills']:
         res = get_features(bill_id)
         for word in res['search_keywords']:
             if keyword.lower() == word.lower():
-                bill_info = get_bill(bill_id)
-                res['bill_info'] = bill_info
-                bills.append(res)
+                bills_ids.append(bill_id)
+                break
+
+    bills_ids += search_titles(keyword)
+
+    for bill_id in bills_ids:
+        bill_info = get_bill(bill_id)
+        bills.append(bill_info)
+
     print(f'Found {len(bills)} results')
     return jsonify({'search_results': bills})
 

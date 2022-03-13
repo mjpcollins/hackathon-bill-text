@@ -74,3 +74,16 @@ def split_amendments(all_amendments):
             decisions[dec] = decision
 
     return decisions
+
+
+def search_titles(search_term):
+    """
+
+
+    :param search_term:
+    :return:
+    """
+
+    url = f'https://bills-api.parliament.uk/api/v1/Bills?SearchTerm={search_term}'
+    data = get_json_from_url(url)
+    return [item.get('billId') for item in data.get('items', [])]

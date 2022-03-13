@@ -21,6 +21,7 @@ def get_features(bill_name):
         for c in cat.lower().split(' ')
         if c not in settings['stop_words']
     ]
+
     return {
         'keywords': keywords,
         'category': category,
