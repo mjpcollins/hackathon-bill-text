@@ -11,7 +11,6 @@ COPY . ./
 RUN pwd
 RUN ls -lah
 RUN pip install -r requirements.txt
-RUN python -m nltk.downloader punkt
 RUN python -m unittest discover ./tests
 
 # Scale up the workers / threads to requirements

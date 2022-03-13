@@ -1,0 +1,197 @@
+header {
+    background-color: #373151;
+    padding: 20px 50px;
+    color: #fff;
+    text-align: left;   
+}
+header a.parliament-home {
+    display: inline-block;
+    padding: 2px;
+}
+.container{
+    background-color: #373151;
+    margin: 1%;
+    padding: 5px 80px;
+}
+.product-banner {
+    background-color: #373151;
+    color: #fff;
+    padding: 5px 60px;
+    border-top: 1px solid #625a75;
+    text-align: left;
+}
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: -15px;
+    margin-left: -15px;
+}
+.col-md-8 {
+    flex: 0 0 66.66667%;
+    max-width: 66.66667%;
+}
+.context-nav {
+    background-color: #625a75;
+    color: #fff;
+    padding: 5px 0;
+    position: relative;
+    font-size: 1rem;
+    line-height: 1.4;
+}
+.context-nav .container .breadcrumb-adaptive {
+    flex: 1 0 0;
+}
+.context-nav .container .breadcrumb-adaptive {
+    overflow-x: hidden;
+}
+.context-nav .breadcrumb {
+    padding: 0;
+    margin: 0;
+    border-radius: 0;
+    display: block;
+    background-color: transparent;
+    width: 100%;
+    overflow: visible;
+    text-overflow: clip;
+}
+.breadcrumb {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0.75rem 1rem;
+    margin-bottom: 1rem;
+    list-style: none;
+    background-color: #e9ecef;
+    border-radius: 0.25rem;
+}
+.context-nav .container .actions {
+    margin-top: 0;
+    margin-left: 20px;
+    width: auto;
+}
+.context-nav ul.actions {
+    margin: 0;
+    float: right;
+    white-space: nowrap;
+}
+.context-nav ul {
+    margin: 0;
+    list-style-type: none;
+    padding: 0;
+}
+.context-nav .container .breadcrumb-adaptive {
+    overflow-x: hidden;
+}
+.context-nav .breadcrumb {
+    padding: 0px 45px;
+    margin: 0;
+    border-radius: 0;
+    display: block;
+    background-color: transparent;
+    width: 100%;
+    overflow: visible;
+    text-overflow: clip;
+    text-align: left;
+}
+.context-nav a {
+    color: #fff;
+    text-decoration: underline;
+}
+.breadcrumb {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0.75rem 1rem;
+    margin-bottom: 1rem;
+    list-style: none;
+    background-color: #e9ecef;
+    border-radius: 0.25rem;
+}
+.context-nav .breadcrumb.breadcrumb-expandable ul {
+    position: relative;
+}
+.context-nav ul {
+    margin: 0;
+    list-style-type: none;
+    padding: 0;
+}
+.context-nav ul.actions li.action-item {
+    margin-right: 12px;
+}
+.context-nav ul.actions li {
+    display: inline-block;
+}
+.context-nav ul.actions li.action-item .icon {
+    margin-right: 6px;
+    vertical-align: middle;
+}
+
+svg:not(:root).svg-inline--fa {
+    overflow: visible;
+}
+.svg-inline--fa.fa-w-14 {
+    width: 0.875em;
+}
+.svg-inline--fa {
+    display: inline-block;
+    font-size: inherit;
+    height: 1em;
+    overflow: visible;
+    vertical-align: -0.125em;
+}
+.context-nav .container {
+    flex-wrap: nowrap;
+}
+.context-nav .container {
+    flex-wrap: nowrap;
+}
+.context-nav .container {
+    display: flex!important;
+    flex-wrap: wrap;
+}
+.context-nav .container-jx {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+}
+.container, .container-fluid, .container-lg, .container-md, .container-sm, .container-xl {
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+*, :after, :before {
+    box-sizing: border-box;
+}
+user agent stylesheet
+div {
+    display: block;
+}
+.context-nav {
+    background-color: #625a75;
+    color: #fff;
+    padding: 5px 0;
+    position: relative;
+    font-size: 1rem;
+    line-height: 1.4;
+}
+.container h1 {
+    font-size: 40px;
+    font-weight: 600;
+}
+.product-banner .image img {
+    height: 200px;
+    float: right;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    display: block;
+}
+.context-nav .container .breadcrumb-adaptive {
+    flex: 1 0 0;
+}
+.context-nav .breadcrumb li {
+    display: inline;
+    margin-right: 5px;
+}
