@@ -1,2 +1,2 @@
-# flask-service-template-lite
-No guff, just a basic app with some unittests, requirements, and a dockerfile. Ready for immediate deployment to cloud run.
+# Smash Parliament
+Making it easier to find and track UK Parliamentary legislation
