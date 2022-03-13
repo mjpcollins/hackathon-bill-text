@@ -38,7 +38,9 @@ def bill_amends(bill_id):
     print(f'Finding amendments for {bill_id}')
     amendments = get_amendments(bill_id)
     split_out_amendments = split_amendments(amendments)
-    return jsonify(split_out_amendments)
+    if split_out_amendments:
+        return jsonify(split_out_amendments)
+    return jsonify({'status': 'No amendments found'})
 
 
 @app.route('/search/<keyword>')
@@ -58,6 +60,7 @@ def search(keyword):
 def change(bill_id):
     print(bill_id)
     return get_change(bill_id)
+
 
 def run():
     app.run(
