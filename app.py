@@ -1,6 +1,6 @@
 from flask import Flask, jsonify
 from config.conf import settings
-from utils.get_amendment_test import get_change
+# from utils.get_amendment_test import get_change
 from utils.keywords import get_features
 from utils.get_bill_text import (
     get_bill,
@@ -52,6 +52,7 @@ def search(keyword):
                 bills.append(res)
     print(f'Found {len(bills)} results')
     return jsonify({'search_results': bills})
+
 
 @app.route('/amendments/<bill_id>')
 def change(bill_id):
