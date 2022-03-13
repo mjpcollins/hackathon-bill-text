@@ -36,11 +36,15 @@ def bill_features(bill_id):
 @app.route('/bill-amendments/<bill_id>')
 def bill_amends(bill_id):
     print(f'Finding amendments for {bill_id}')
+    bill_info = get_bill(bill_id)
     amendments = get_amendments(bill_id)
-    split_out_amendments = split_amendments(amendments)
-    if split_out_amendments:
-        return jsonify(split_out_amendments)
-    return jsonify({'status': 'No amendments found'})
+    if amendments:
+        split_out_amendments = split_amendments(amendments)
+        bill_info['amendments'] = split_out_amendments
+        bill_info['status'] = 'OK'
+        return jsonify(bill_info)
+    bill_info['status'] = 'No amendments found'
+    return jsonify(bill_info)
 
 
 @app.route('/search/<keyword>')
@@ -51,6 +55,8 @@ def search(keyword):
         res = get_features(bill_id)
         for word in res['search_keywords']:
             if keyword.lower() == word.lower():
+                bill_info = get_bill(bill_id)
+                res['bill_info'] = bill_info
                 bills.append(res)
     print(f'Found {len(bills)} results')
     return jsonify({'search_results': bills})

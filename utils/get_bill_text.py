@@ -10,7 +10,12 @@ def get_bill(bill_number):
     :return: The full text of the bill
     """
 
-    return {'full_text': bills[bill_number]}
+    text = bills.get(bill_number, 'No text available')
+    data = get_json_from_url(url=f'https://bills-api.parliament.uk/api/v1/Bills/{bill_number}')
+    return {
+        'full_text': text,
+        'data': data
+    }
 
 
 def get_amendments(bill_number):
@@ -69,8 +74,3 @@ def split_amendments(all_amendments):
             decisions[dec] = decision
 
     return decisions
-
-
-if __name__ == '__main__':
-
-    print()
