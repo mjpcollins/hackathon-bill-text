@@ -2,6 +2,7 @@ import re
 import json
 import requests
 from collections import Counter
+from config.conf import settings
 from nltk.tokenize import word_tokenize
 from utils.get_bill_text import get_bill
 
@@ -14,13 +15,18 @@ def get_features(bill_name):
     :return: information
     """
 
-    keywords = get_keywords(bill_name).most_common(20)
+    keywords = get_keywords(bill_name).most_common(40)
     category, sponsors = get_sponsors(bill_name)
+    split_category = [
+        c for cat in category
+        for c in cat.lower().split(' ')
+        if c not in settings['stop_words']
+    ]
     return {
         'keywords': keywords,
         'category': category,
         'sponsors': sponsors,
-        'search_keywords': list(set(category + [k[0] for k in keywords]))
+        'search_keywords': list(set(split_category + [k[0].lower() for k in keywords]))
     }
 
 
@@ -45,11 +51,9 @@ def create_dict_of_words(text):
     :return: Dict of freq: value
     """
 
-    with open('config/stopwords.txt', 'r') as F:
-        stop_words = {w.replace('\n', '') for w in F.readlines()}
     t = remove_unimportant_characters(text)
     word_tokens = word_tokenize(t)
-    filtered_sentence = [w.lower() for w in word_tokens if not w.lower() in stop_words]
+    filtered_sentence = [w.lower() for w in word_tokens if not w.lower() in settings['stop_words']]
     return Counter(filtered_sentence)
 
 
