@@ -1,4 +1,3 @@
-import json
 import requests
 from dateutil import parser as date_parser
 
