@@ -73,7 +73,7 @@ def newsfeed(use_subscriptions=False):
 	# else just look at all the bills that are available
 	# (for now, just do the latter)
 
-	for bill_id in get_sample_bill_ids(10):
+	for bill_id in get_sample_bill_ids(5):
 		
 		bill = get_bill(bill_id)
 
